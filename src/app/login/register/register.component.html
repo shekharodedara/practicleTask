@@ -1,0 +1,43 @@
+<div align="center"><h1>Register User</h1>
+<form [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm.value)">
+<input type="text" id="fullName" formControlName="fullName" placeholder="Enter FullName">
+<span *ngIf="(registerForm.controls['fullName'].touched && registerForm.controls['fullName'].errors?.['pattern']) ||
+(registerForm.controls['fullName'].touched && registerForm.controls['fullName'].errors?.['maxlength'])"  style="color: red;">
+    invalid fullname</span>
+<br><br>
+<input type="email" id="email" formControlName="email" placeholder="Enter Email">
+<span *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['email']" style="color: red;">Invalid
+    Email</span>
+<br><br>
+<input type="text" id="contact" formControlName="contact" placeholder="Enter contact">
+<span *ngIf="
+(registerForm.controls['contact'].touched && registerForm.controls['contact'].errors?.['minlength']) || (registerForm.controls['contact'].touched && registerForm.controls['contact'].errors?.['pattern'])
+ || (registerForm.controls['contact'].touched && registerForm.controls['contact'].errors?.['maxlength'])"  style="color: red;">
+invalid contact</span>
+<br><br>
+<select id="country" formControlName="country" (change)="selectState($event)">
+    <option disabled selected>select your conutry</option>
+    <option *ngFor="let country of countries" [value]="country.country">{{country.country}}</option>
+</select>
+<span *ngIf="registerForm.controls['country'].touched && registerForm.controls['country'].errors?.['required']"  style="color: red;">Please select country</span>
+<br><br>
+<select id="state" formControlName="state" (change)="selectCity($event)" (focus)="initState()">
+    <option disabled selected>select your state</option>
+    <option *ngFor="let s of setState" [value]="s">{{s}}</option>
+</select>
+<span *ngIf="registerForm.controls['state'].touched && registerForm.controls['state'].errors?.['required']" style="color: red;">Please select state</span>
+<br><br>
+<select id="city" formControlName="city" (focus)="initCity()">
+    <option disabled selected>select your city</option>
+    <option *ngFor="let c of setCity" [value]="c">{{c}}</option>
+</select>
+<span *ngIf="registerForm.controls['city'].touched && registerForm.controls['city'].errors?.['required']" style="color: red;">Please select city</span>
+<br><br>
+<input type="password" formControlName="password" placeholder="Password">
+<span *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['pattern']" style="color: red;">
+    invalid Password</span><br><br>
+<button type="submit" [disabled]="!registerForm.valid">Submit</button><br><br>
+<a href="#" routerLink="/login">Back to Login</a>
+</form>
+</div>
+
