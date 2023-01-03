@@ -1,14 +1,19 @@
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [
+    { provide: MatFormFieldControl, useExisting: HomeComponent}   
+  ]
 })
 export class HomeComponent implements OnInit, AfterViewChecked {
   lstorage: any;
@@ -23,8 +28,9 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   storage: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('callAPIDialog') callAPIDialog: TemplateRef<any>;
 
-  constructor(public fb: FormBuilder, public router: Router) {
+  constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
     this.studentForm = fb.group(
       {
         fullName: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
@@ -39,6 +45,13 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.dataSource = new MatTableDataSource(this.lstorage);
     this.displayedColumns = ['fullName', 'email', 'contact', 'dob', 'std', 'percentage', 'status', 'action'];
     !this.lstorage ? localStorage.setItem('studentList', JSON.stringify([])) : null;
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(this.callAPIDialog);
+    dialogRef.afterClosed().subscribe(
+      // result => {console.log(result);}
+      )
   }
 
   ngAfterViewChecked(): void {
@@ -71,6 +84,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.toggle = false;
     this.storage = true;
     this.studentForm.reset();
+    this.dialog.closeAll();
   }
 
   update(i: number, element: any) {
