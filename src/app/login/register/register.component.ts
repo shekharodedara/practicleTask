@@ -7,14 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-<<<<<<< HEAD
-  lstorage:any;
-  registerForm: FormGroup;
-  cities:any;
-  countries:any;
-  setState:any;
-  setCity:any;
-=======
   lstorage: any;
   registerForm: FormGroup;
   cities: any;
@@ -22,7 +14,6 @@ export class RegisterComponent implements OnInit {
   setState: any;
   setCity: any;
   
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
   constructor(public fb: FormBuilder) {
     this.registerForm = fb.group(
       {
@@ -31,21 +22,13 @@ export class RegisterComponent implements OnInit {
         contact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(14), Validators.pattern('[0-9]*')]],
         country: ['', [Validators.required]],
         state: ['', [Validators.required]],
-<<<<<<< HEAD
-        city: ['',[Validators.required]],
-=======
         city: ['', [Validators.required]],
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
         password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
       }
     );
     this.lstorage = JSON.parse(localStorage.getItem('register')!);
     !this.lstorage ? localStorage.setItem('register', JSON.stringify([])) : null;
-<<<<<<< HEAD
-   }
-=======
   }
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
 
   ngOnInit(): void {
     this.countries = [
@@ -66,31 +49,12 @@ export class RegisterComponent implements OnInit {
     ];
   }
 
-<<<<<<< HEAD
-  selectCity(event:any){
-=======
   selectCity(event: any) {
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
     for (let i in this.cities) {
       if (this.cities[i].state === event.target.value)
         this.setCity = this.cities[i].cities;
     }
   }
-<<<<<<< HEAD
-  selectState(event:any){
-    for (let i in this.countries) {
-      if (this.countries[i].country === event.target.value)
-        this.setState = this.countries[i].states;
-    } 
-  }
-  initCity(){}
-  initState(){}
-  submitForm(data:any){
-    this.lstorage.push(data)
-    localStorage.setItem('register', JSON.stringify(this.lstorage))
-    alert('data submited successfully')
-    this.registerForm.reset()
-=======
 
   selectState(event: any) {
     for (let i in this.countries) {
@@ -104,7 +68,6 @@ export class RegisterComponent implements OnInit {
     localStorage.setItem('register', JSON.stringify(this.lstorage));
     alert('data submited successfully');
     this.registerForm.reset();
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
   }
 
 }

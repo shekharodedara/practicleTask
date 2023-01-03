@@ -1,8 +1,4 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-=======
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -11,7 +7,6 @@ export interface DialogData {
   animal: string;
   name: string;
 }
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
 
 @Component({
   selector: 'app-login',
@@ -20,30 +15,6 @@ export interface DialogData {
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-<<<<<<< HEAD
-  lstorage:any;
-  constructor(public fb: FormBuilder, public router: Router) {
-    this.loginForm = fb.group(
-      {
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      }
-    );
-    this.lstorage = JSON.parse(localStorage.getItem('register')!);
-   }
-
-  ngOnInit(): void {
-  }
-
-  login(data:any){
-    for(let i of this.lstorage){
-      if((i.email == data.username || i.fullName == data.username) && i.password == data.password){
-      this.router.navigate(['/home'])
-      return;}
-    }
-    alert('invalid username or password')
-  }
-=======
   lstorage: any;
 
   animal: string;
@@ -97,5 +68,4 @@ export class ExampleDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
 }

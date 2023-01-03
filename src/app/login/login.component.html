@@ -1,14 +1,6 @@
 <div align="center">
     <h1>Login</h1>
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-<<<<<<< HEAD
-    <input type="text" formControlName="username" id="username" placeholder="username or email"><br><br>
-    <input type="password" formControlName="password" id="password" placeholder="password"><br><br>
-    <button type="submit" [disabled]="!loginForm.valid">Login</button><br><br>
-</form>
-<a href="#" routerLink="/register">Create Account</a>
-</div>
-=======
         <input type="text" formControlName="username" id="username" placeholder="username or email"><br><br>
         <input type="password" formControlName="password" id="password" placeholder="password"><br><br>
         <button type="submit" [disabled]="!loginForm.valid">Login</button><br><br>
@@ -32,4 +24,3 @@
       You chose: <i>{{animal}}</i>
     </li>
   </ol>
->>>>>>> 5a280651138615bbb2317091b63d7760a428f063
