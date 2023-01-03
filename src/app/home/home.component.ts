@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   lstorage: any;
   today: any = new Date();
   date95: any = new Date('01-01-1995');
-  toggle: boolean = false;
   submit: boolean = true;
   studentForm: FormGroup;
   dataSource: MatTableDataSource<any>;
@@ -78,10 +77,8 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     }
     else if (!this.submit) {
       this.lstorage[this.id] = row;
-      this.submit = true;
     }
     localStorage.setItem('studentList', JSON.stringify(this.lstorage));
-    this.toggle = false;
     this.storage = true;
     this.studentForm.reset();
     this.dialog.closeAll();
@@ -89,7 +86,6 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
   update(i: number, element: any) {
     let row = JSON.parse(JSON.stringify(element));
-    this.toggle = true;
     this.submit = false;
     this.id = i;
     delete row.status;
@@ -111,9 +107,5 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
   onChange(event: MatTabChangeEvent) {
     event.index === 3 ? this.router.navigate(['/login']) : null;
-  }
-  add() {
-    this.toggle = !this.toggle;
-    this.submit = true;
   }
 }
