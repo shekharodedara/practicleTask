@@ -1,7 +1,18 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  .mat-sort-header-container {
-    align-items: center;
-  }
+.mat-sort-header-container {
+  align-items: center;
+}
+
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+
+::ng-deep .mat-tab-header .mat-tab-label:last-child {
+  margin-left: auto;
+}

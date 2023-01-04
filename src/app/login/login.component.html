@@ -7,9 +7,10 @@
     </form>
     <a href="#" routerLink="/register">Create Account</a>
 </div>
-<br><br><br><hr>
 
 
+<div *ngIf="dialogg">
+  <br><br><br><hr>
 <ol>
     <li>
       <mat-form-field appearance="fill">
@@ -24,3 +25,4 @@
       You chose: <i>{{animal}}</i>
     </li>
   </ol>
+</div>

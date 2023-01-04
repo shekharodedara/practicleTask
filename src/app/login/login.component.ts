@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   animal: string;
   name: string;
+  dialogg: boolean = false;
 
   constructor(public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
     this.loginForm = fb.group({
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
     for (let i of this.lstorage) {
       if ((i.email == data.username || i.fullName == data.username) && i.password == data.password) {
         this.router.navigate(['/home'])
+        localStorage.setItem('practicleUser', JSON.stringify(data.username))
         return;
       }
     }

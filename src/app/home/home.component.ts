@@ -5,15 +5,12 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldControl } from '@angular/material/form-field';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  providers: [
-    { provide: MatFormFieldControl, useExisting: HomeComponent}   
-  ]
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewChecked {
   lstorage: any;
@@ -25,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   displayedColumns: string[];
   id: number;
   storage: boolean = false;
+  user: any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('callAPIDialog') callAPIDialog: TemplateRef<any>;
@@ -43,14 +41,8 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.lstorage = JSON.parse(localStorage.getItem('studentList')!);
     this.dataSource = new MatTableDataSource(this.lstorage);
     this.displayedColumns = ['fullName', 'email', 'contact', 'dob', 'std', 'percentage', 'status', 'action'];
+    this.user = JSON.parse(localStorage.getItem('practicleUser')!) || 'User';
     !this.lstorage ? localStorage.setItem('studentList', JSON.stringify([])) : null;
-  }
-
-  openDialog() {
-    let dialogRef = this.dialog.open(this.callAPIDialog);
-    dialogRef.afterClosed().subscribe(
-      // result => {console.log(result);}
-      )
   }
 
   ngAfterViewChecked(): void {
@@ -65,6 +57,21 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void { }
+
+  filterTable(event: any) {
+    this.dataSource.filter = event.target.value.trim().toLowerCase();
+  }
+
+  onChange(event: MatTabChangeEvent) {
+    event.index === 3 ? this.router.navigate(['/login']) : null;
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(this.callAPIDialog);
+    dialogRef.afterClosed().subscribe(
+      // result => {console.log(result);}
+    )
+  }
 
   SubmitData(data: any) {
     let row;
@@ -101,11 +108,15 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  filterTable(event: any) {
-    this.dataSource.filter = event.target.value.trim().toLowerCase();
+  sendEmail(e: Event) {
+    // console.log(e.target as HTMLFormElement)
+    e.preventDefault();
+    emailjs.sendForm('service_9dp2zto', 'template_bmairo7', e.target as HTMLFormElement, 'KgHsPIEkbijGewPA4')
+      .then((result: EmailJSResponseStatus) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
   }
 
-  onChange(event: MatTabChangeEvent) {
-    event.index === 3 ? this.router.navigate(['/login']) : null;
-  }
 }

@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm(data: any) {
+    this.lstorage = JSON.parse(localStorage.getItem('register')!);
     this.lstorage.push(data);
     localStorage.setItem('register', JSON.stringify(this.lstorage));
     alert('data submited successfully');

@@ -1,4 +1,4 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -26,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     MatTabsModule,
+    FormsModule,
     MatTableModule,
     MatSortModule,
     MatInputModule,
